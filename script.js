@@ -151,3 +151,20 @@ function deleteExpense(id) {
 
 // Initial UI Render
 updateDashboard();
+// Sidebar Navigation Interactivity
+const navLinks = document.querySelectorAll('.nav-link');
+
+navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault(); // Prevents the page from jumping
+        
+        // Remove 'active' class from all links
+        navLinks.forEach(item => item.classList.remove('active'));
+        
+        // Add 'active' class to the clicked link
+        this.classList.add('active');
+        
+        // Logs the clicked menu item name in the console
+        console.log("Active view switched to:", this.textContent.trim());
+    });
+});
