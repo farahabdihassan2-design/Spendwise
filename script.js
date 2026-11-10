@@ -151,20 +151,31 @@ function deleteExpense(id) {
 
 // Initial UI Render
 updateDashboard();
-// Sidebar Navigation Interactivity
+
+// Sidebar Navigation Interactivity & View Switching
 const navLinks = document.querySelectorAll('.nav-link');
 
 navLinks.forEach(link => {
     link.addEventListener('click', function(e) {
-        e.preventDefault(); // Prevents the page from jumping
+        e.preventDefault(); // Prevents page jumping
         
-        // Remove 'active' class from all links
+        // 1. Remove 'active' class from all sidebar links
         navLinks.forEach(item => item.classList.remove('active'));
         
-        // Add 'active' class to the clicked link
+        // 2. Add 'active' class to the clicked link
         this.classList.add('active');
         
-        // Logs the clicked menu item name in the console
-        console.log("Active view switched to:", this.textContent.trim());
+        // 3. Get the target view name from data-target
+        const targetView = this.getAttribute('data-target');
+        console.log("Active view switched to:", targetView);
+        
+        // 4. Optional: If you have content sections, show/hide them here
+        const sections = document.querySelectorAll('.content-section');
+        sections.forEach(section => section.style.display = 'none');
+        
+        const targetSection = document.getElementById(targetView);
+        if (targetSection) {
+        targetSection.style.display = 'block';
+       }
     });
 });
